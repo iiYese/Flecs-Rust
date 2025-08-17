@@ -6,6 +6,7 @@ use crate::core::*;
 use crate::sys;
 
 #[doc(hidden)]
+#[allow(clippy::not_unsafe_ptr_arg_deref)]
 pub fn internal_register_component<
     'a,
     const IS_NAMED: bool,
@@ -20,6 +21,10 @@ where
 {
     let world = world.world();
     let world_ptr = world.world_ptr_mut();
+
+    if unsafe { core::ffi::CStr::from_ptr(name) } == c"XXX" {
+        panic!();
+    }
 
     let id = if IS_NAMED {
         register_component_data_named::<COMPONENT_REGISTRATION, T>(world, name)
