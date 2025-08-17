@@ -24,7 +24,7 @@ where
 
     let id = if IS_NAMED {
         if unsafe { core::ffi::CStr::from_ptr(name) } == c"XXX" {
-            panic!();
+            println!("reg");
         }
         register_component_data_named::<COMPONENT_REGISTRATION, T>(world, name)
     } else {
