@@ -22,11 +22,10 @@ where
     let world = world.world();
     let world_ptr = world.world_ptr_mut();
 
-    if unsafe { core::ffi::CStr::from_ptr(name) } == c"XXX" {
-        panic!();
-    }
-
     let id = if IS_NAMED {
+        if unsafe { core::ffi::CStr::from_ptr(name) } == c"XXX" {
+            panic!();
+        }
         register_component_data_named::<COMPONENT_REGISTRATION, T>(world, name)
     } else {
         register_component_data::<COMPONENT_REGISTRATION, T>(world)
